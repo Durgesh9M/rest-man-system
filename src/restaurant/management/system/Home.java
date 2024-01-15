@@ -4,12 +4,14 @@
  */
 package restaurant.management.system;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author durge
  */
 public class Home extends javax.swing.JFrame {
-
+    public String email;
     /**
      * Creates new form home
      */
@@ -17,8 +19,15 @@ public class Home extends javax.swing.JFrame {
         initComponents();
     }
 
-    public Home(String email) {
+    public Home(String userEmail) {
         initComponents();
+        email = userEmail;
+        if(!email.equals("admin@gmail.com")){
+            btnCategory.setVisible(false);
+            btnNewProduct.setVisible(false);
+            btnVerifyUser.setVisible(false);
+            btnViewEditDeleteProduct.setVisible(false);
+        }
     }
 
     /**
@@ -30,31 +39,139 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        btnCategory = new javax.swing.JButton();
+        btnNewProduct = new javax.swing.JButton();
+        btnViewEditDeleteProduct = new javax.swing.JButton();
+        btnVerifyUser = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Home");
+        jButton1.setText("Logout");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Place Order");
+
+        jButton3.setText("View Bill & Order Placed Details");
+
+        jButton4.setText("Change Password");
+
+        jButton5.setText("Change Security Question");
+
+        btnCategory.setText("Manage Category");
+        btnCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCategoryActionPerformed(evt);
+            }
+        });
+
+        btnNewProduct.setText("New Product");
+        btnNewProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewProductActionPerformed(evt);
+            }
+        });
+
+        btnViewEditDeleteProduct.setText("View,Edit & Delete Product");
+
+        btnVerifyUser.setText("Verify Users");
+
+        jButton10.setText("Exit");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(169, 169, 169)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jButton1)
+                        .addGap(53, 53, 53)
+                        .addComponent(jButton2)
+                        .addGap(57, 57, 57)
+                        .addComponent(jButton3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(btnCategory)
+                        .addGap(70, 70, 70)
+                        .addComponent(btnNewProduct)
+                        .addGap(61, 61, 61)
+                        .addComponent(btnViewEditDeleteProduct)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4)
+                        .addGap(82, 82, 82)
+                        .addComponent(jButton5)
+                        .addGap(56, 56, 56)
+                        .addComponent(jButton10))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(btnVerifyUser)))
+                .addContainerGap(841, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jLabel1)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4)
+                    .addComponent(jButton5)
+                    .addComponent(jButton10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1383, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCategory)
+                    .addComponent(btnNewProduct)
+                    .addComponent(btnViewEditDeleteProduct)
+                    .addComponent(btnVerifyUser))
+                .addGap(114, 114, 114))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoryActionPerformed
+        new ManageCategory().setVisible(true);
+    }//GEN-LAST:event_btnCategoryActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int a = JOptionPane.showConfirmDialog(null, "Do you really wish to Logout ?", "Select", JOptionPane.YES_NO_OPTION);
+        if(a == 0){
+            setVisible(false);
+            new Login().setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        int a = JOptionPane.showConfirmDialog(null, "Do you wish to exit the Application?", "Message", JOptionPane.YES_NO_OPTION);
+        if(a == 0){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void btnNewProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewProductActionPerformed
+        new AddNewEmployee().setVisible(true);
+    }//GEN-LAST:event_btnNewProductActionPerformed
 
     /**
      * @param args the command line arguments
@@ -93,6 +210,15 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnCategory;
+    private javax.swing.JButton btnNewProduct;
+    private javax.swing.JButton btnVerifyUser;
+    private javax.swing.JButton btnViewEditDeleteProduct;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     // End of variables declaration//GEN-END:variables
 }
