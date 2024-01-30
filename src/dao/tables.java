@@ -26,6 +26,10 @@ public class tables {
            String productTable = "create table product(id int AUTO_INCREMENT primary key,name varchar(200),category varchar(200), price varchar(200))";
            DbOperations.setDataOrDelete(productTable, "Product Table Added Successfully"); 
            
+           //Creating Bill Table
+           String billTable = "create table bill(id int primary key,name varchar(200), mobileNumber varchar(200), email varchar(200), date varchar(50), total varchar(200), createdBy varchar(200))";
+           DbOperations.setDataOrDelete(billTable, "Bill Table Created Successfully");  
+           
            //Creating Employee Table
            String employeeTable = "create table employee(id int AUTO_INCREMENT primary key, name varchar(200), category varchar(200))";
            DbOperations.setDataOrDelete(employeeTable, "Employee Table Added Successfully");
