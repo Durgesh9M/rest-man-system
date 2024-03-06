@@ -10,13 +10,15 @@ import model.Employee;
 import model.Category;
 import java.util.Iterator;
 import dao.EmployeeDao;
-import java.util.*;
 /**
  *
- * @author durge
+ * @author durgesh
  */
 public class AddNewEmployee extends javax.swing.JFrame {
 
+    public String emailPattern = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\."  
+                +"[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
+    public String mobileNumberPattern = "^[0-9]*$";
     /**
      * Creates new form AddNewEmployee
      */
@@ -26,9 +28,16 @@ public class AddNewEmployee extends javax.swing.JFrame {
     }
 
     public void validateFields(){
-        String id = txtId.getText();
+        String id = txtEId.getText();
         String name = txtName.getText();
-        if(!id.equals("") && !name.equals(""))
+        String category = (String) txtCategory.getSelectedItem();
+        String salary = txtSalary.getText();
+        String timeslot = (String) txtTimeSlot.getSelectedItem();
+        String gender = (String) txtGender.getSelectedItem();
+        String mobile = txtMobile.getText();
+        String email = txtEmail.getText();
+        String address = txtAddress.getText();
+        if(!id.equals("") && !name.equals("") && !category.equals("") && !salary.equals("")&& !timeslot.equals("")&& !gender.equals("")&& !mobile.equals("")&& !email.equals("")&& email.matches(emailPattern)&& mobile.matches(mobileNumberPattern) && mobile.length() == 10 && !address.equals(""))
             btnSave.setEnabled(true);
         else
             btnSave.setEnabled(false);
@@ -47,11 +56,23 @@ public class AddNewEmployee extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
+        txtEId = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
         txtCategory = new javax.swing.JComboBox<>();
         btnSave = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtSalary = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtTimeSlot = new javax.swing.JComboBox<>();
+        txtGender = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtMobile = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtAddress = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -59,11 +80,9 @@ public class AddNewEmployee extends javax.swing.JFrame {
                 formComponentShown(evt);
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("New Employee");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 17, -1, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/close.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -71,40 +90,42 @@ public class AddNewEmployee extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 0, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("ID");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 124, -1, -1));
+        jLabel2.setText("Employee ID");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Name");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 164, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Category");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 204, -1, -1));
 
-        txtId.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtEId.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtEId.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtIdKeyReleased(evt);
+                txtEIdKeyReleased(evt);
             }
         });
-        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 121, 276, -1));
 
+        txtName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNameKeyReleased(evt);
             }
         });
-        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 161, 276, -1));
 
+        txtCategory.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chef", "Waiter / Waitress", "Manager", "Kitchen Staff", "Cleaning and Maintenance", "Delivery", "Cashier" }));
         txtCategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCategoryActionPerformed(evt);
             }
         });
-        getContentPane().add(txtCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 201, 276, -1));
+        txtCategory.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCategoryKeyReleased(evt);
+            }
+        });
 
         btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/save.png"))); // NOI18N
@@ -114,7 +135,6 @@ public class AddNewEmployee extends javax.swing.JFrame {
                 btnSaveActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 241, -1, -1));
 
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/clear.png"))); // NOI18N
@@ -124,7 +144,182 @@ public class AddNewEmployee extends javax.swing.JFrame {
                 btnClearActionPerformed(evt);
             }
         });
-        getContentPane().add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, -1, 32));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Salary");
+
+        txtSalary.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtSalary.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSalaryKeyReleased(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Time Slot");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setText("Gender");
+
+        txtTimeSlot.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTimeSlot.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8:00 - 16:00", "16:00 - 23:59" }));
+        txtTimeSlot.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimeSlotKeyReleased(evt);
+            }
+        });
+
+        txtGender.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Transgender", "Prefer Not to Say" }));
+        txtGender.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtGenderKeyReleased(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setText("Mobile No.");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setText("Email");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setText("Address");
+
+        txtMobile.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtMobile.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtMobileKeyReleased(evt);
+            }
+        });
+
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEmailKeyReleased(evt);
+            }
+        });
+
+        txtAddress.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAddressKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel1)
+                        .addGap(683, 683, 683)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(jLabel2)
+                        .addGap(26, 26, 26)
+                        .addComponent(txtEId, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(jLabel3)
+                        .addGap(72, 72, 72)
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(jLabel4)
+                        .addGap(50, 50, 50)
+                        .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(jLabel8)
+                        .addGap(37, 37, 37)
+                        .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(61, 61, 61)
+                                .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(111, 111, 111)
+                                .addComponent(txtTimeSlot, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(68, 68, 68)
+                                .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSave)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnClear))
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel1))
+                    .addComponent(jButton1))
+                .addGap(83, 83, 83)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTimeSlot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave)
+                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -138,20 +333,26 @@ public class AddNewEmployee extends javax.swing.JFrame {
         new AddNewEmployee().setVisible(true);
     }//GEN-LAST:event_btnClearActionPerformed
 
-    private void txtIdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdKeyReleased
+    private void txtEIdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEIdKeyReleased
         //if id is empty, save button is disabled.
         validateFields();
-    }//GEN-LAST:event_txtIdKeyReleased
+    }//GEN-LAST:event_txtEIdKeyReleased
 
     private void txtNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyReleased
-        validateFields();  ////if name is empty, save button is disabled.
+        validateFields();  //if name is empty, save button is disabled.
     }//GEN-LAST:event_txtNameKeyReleased
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         Employee employee = new Employee();
-        employee.setId(Integer.parseInt(txtId.getText()));
+        employee.setEid(Integer.parseInt(txtEId.getText()));
         employee.setName(txtName.getText());
         employee.setCategory((String)txtCategory.getSelectedItem());
+        employee.setSalary(txtSalary.getText());
+        employee.setTimeslot((String)txtTimeSlot.getSelectedItem());
+        employee.setGender((String) txtGender.getSelectedItem());
+        employee.setMobile(txtMobile.getText());
+        employee.setEmail(txtEmail.getText());
+        employee.setAddress(txtAddress.getText());
         EmployeeDao.save(employee);
         setVisible(false);
         new AddNewEmployee().setVisible(true);
@@ -169,6 +370,34 @@ public class AddNewEmployee extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtCategoryKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCategoryKeyReleased
+        validateFields();
+    }//GEN-LAST:event_txtCategoryKeyReleased
+
+    private void txtSalaryKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalaryKeyReleased
+        validateFields();
+    }//GEN-LAST:event_txtSalaryKeyReleased
+
+    private void txtTimeSlotKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimeSlotKeyReleased
+        validateFields();
+    }//GEN-LAST:event_txtTimeSlotKeyReleased
+
+    private void txtGenderKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGenderKeyReleased
+        validateFields();
+    }//GEN-LAST:event_txtGenderKeyReleased
+
+    private void txtMobileKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMobileKeyReleased
+        validateFields();
+    }//GEN-LAST:event_txtMobileKeyReleased
+
+    private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
+        validateFields();
+    }//GEN-LAST:event_txtEmailKeyReleased
+
+    private void txtAddressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAddressKeyReleased
+        validateFields();
+    }//GEN-LAST:event_txtAddressKeyReleased
 
     /**
      * @param args the command line arguments
@@ -210,11 +439,23 @@ public class AddNewEmployee extends javax.swing.JFrame {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField txtAddress;
     private javax.swing.JComboBox<String> txtCategory;
-    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtEId;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JComboBox<String> txtGender;
+    private javax.swing.JTextField txtMobile;
     private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtSalary;
+    private javax.swing.JComboBox<String> txtTimeSlot;
     // End of variables declaration//GEN-END:variables
 }
