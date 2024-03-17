@@ -4,9 +4,6 @@
  */
 package model;
 
-import com.mysql.cj.jdbc.Blob;
-import javax.swing.ImageIcon;
-
 /**
  *
  * @author durgesh
@@ -21,15 +18,15 @@ public class Employee {
     private String mobile;
     private String email;
     private String address;
-    private ImageIcon idpicture;
+//    private ImageIcon idpicture;
 
-    public ImageIcon getIdpicture() {
-        return idpicture;
-    }
-
-    public void setIdpicture(ImageIcon idpicture) {
-        this.idpicture = idpicture;
-    }
+//    public ImageIcon getIdpicture() {
+//        return idpicture;
+//    }
+//
+//    public void setIdpicture(ImageIcon idpicture) {
+//        this.idpicture = idpicture;
+//    }
     
     public String getTimeslot() {
         return timeslot;
