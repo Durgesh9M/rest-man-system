@@ -16,7 +16,7 @@ import model.Employee;
 
 /**
  *
- * @author durge
+ * @author durgesh
  */
 public class ViewEditDeleteEmployee extends javax.swing.JFrame {
 
@@ -190,6 +190,12 @@ public class ViewEditDeleteEmployee extends javax.swing.JFrame {
 
         txtTimeSlot.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTimeSlot.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8:00 - 16:00", "16:00 - 23:59" }));
+        txtTimeSlot.setSelectedIndex(-1);
+        txtTimeSlot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimeSlotActionPerformed(evt);
+            }
+        });
         txtTimeSlot.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimeSlotKeyReleased(evt);
@@ -198,16 +204,7 @@ public class ViewEditDeleteEmployee extends javax.swing.JFrame {
 
         txtGender.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Transgender", "Prefer Not to Say" }));
-        txtGender.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGenderActionPerformed(evt);
-            }
-        });
-        txtGender.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtGenderKeyReleased(evt);
-            }
-        });
+        txtGender.setSelectedIndex(-1);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Mobile No.");
@@ -366,6 +363,11 @@ public class ViewEditDeleteEmployee extends javax.swing.JFrame {
         employee.setName(txtName.getText());              //setting name in product
         employee.setCategory((String) jComboBox1.getSelectedItem());
         employee.setSalary(txtSalary.getText());
+        employee.setTimeslot((String) txtTimeSlot.getSelectedItem());
+        employee.setGender((String) txtGender.getSelectedItem());
+        employee.setMobile(txtMobile.getText());
+        employee.setEmail(txtEmail.getText());
+        employee.setAddress(txtAddress.getText());
         EmployeeDao.update(employee);                         //calling ProductDao update() method in it we are passing product object
         setVisible(false);                    //to hide the page
         new ViewEditDeleteEmployee().setVisible(true); //to visible ViewEditDeleteProduct page
@@ -387,7 +389,7 @@ public class ViewEditDeleteEmployee extends javax.swing.JFrame {
         Iterator<Employee> itr = list.iterator();                   //to extract the values from ProductDao we are calling the iterator of product type
         while (itr.hasNext()) {                                     //hasNext return true and false
             Employee employeeObj = itr.next();
-            dtm.addRow(new Object[]{employeeObj.getEid(), employeeObj.getName(), employeeObj.getCategory(), employeeObj.getSalary()});       //to load this details in the table   
+            dtm.addRow(new Object[]{employeeObj.getEid(), employeeObj.getName(), employeeObj.getCategory(), employeeObj.getSalary(), employeeObj.getTimeslot(), employeeObj.getGender(), employeeObj.getMobile(), employeeObj.getEmail(), employeeObj.getAddress()});       //to load this details in the table   
         }
     }//GEN-LAST:event_formComponentShown
 
@@ -411,7 +413,9 @@ public class ViewEditDeleteEmployee extends javax.swing.JFrame {
         String address = model.getValueAt(index, 8).toString();
         txtAddress.setText(address);
         btnUpdate.setEnabled(true);            //to enable the button
-        btnDelete.setEnabled(true);            //to enable the button
+        btnDelete.setEnabled(true);
+        txtGender.removeAllItems();
+        txtGender.addItem(gender);
         jComboBox1.removeAllItems();             //to remove all items in the combobox
         jComboBox1.addItem(category);
         
@@ -449,10 +453,6 @@ public class ViewEditDeleteEmployee extends javax.swing.JFrame {
         validateField();
     }//GEN-LAST:event_txtTimeSlotKeyReleased
 
-    private void txtGenderKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGenderKeyReleased
-        validateField();
-    }//GEN-LAST:event_txtGenderKeyReleased
-
     private void txtMobileKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMobileKeyReleased
         validateField();
     }//GEN-LAST:event_txtMobileKeyReleased
@@ -465,10 +465,6 @@ public class ViewEditDeleteEmployee extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAddressActionPerformed
 
-    private void txtGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGenderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGenderActionPerformed
-
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
@@ -480,6 +476,10 @@ public class ViewEditDeleteEmployee extends javax.swing.JFrame {
     private void txtMobileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMobileActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMobileActionPerformed
+
+    private void txtTimeSlotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimeSlotActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimeSlotActionPerformed
 
     
     /**

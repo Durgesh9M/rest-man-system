@@ -29,14 +29,12 @@ public class EmployeeDao {
                 employee.setName(rs.getString("name"));
                 employee.setCategory(rs.getString("category"));
                 employee.setSalary(rs.getString("salary"));
-                employee.setTimeslot("timeslot");
-                employee.setGender("gender");
-                employee.setMobile("mobile");
-                employee.setEmail("email");
-                employee.setAddress("address");
+                employee.setTimeslot(rs.getString("timeslot"));
+                employee.setGender(rs.getString("gender"));
+                employee.setMobile(rs.getString("mobile"));
+                employee.setEmail(rs.getString("email"));
+                employee.setAddress(rs.getString("address"));
                 arrayList.add(employee);              //in the arraylist we are adding object of Product
-                
-                
             }
         }
         catch(Exception e){
